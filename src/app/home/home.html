@@ -1,0 +1,21 @@
+<div class="container">
+  @if (selectedId() === null) {
+    <button (click)="newSession()">New session</button>
+    <ul>
+      @for (f of formats(); track f.id) {
+        <li>
+          @if (confirmingId() === f.id) {
+            <span>Are you sure you want to delete "{{ f.client || '(no client)' }}"? This can't be undone.</span>
+            <button (click)="confirmDelete(f.id)">Yes, delete</button>
+            <button (click)="cancelDelete()">Cancel</button>
+          } @else {
+            <button (click)="open(f.id)">{{ f.client || '(no client)' }} – {{ f.formation }}</button>
+            <button (click)="askDelete(f.id)">Delete</button>
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <app-session [formatId]="selectedId()!" (back)="close()"></app-session>
+  }
+</div>

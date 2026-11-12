@@ -1,0 +1,16 @@
+
+
+.container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+
+  &__forms {
+    height: 10vw;
+    width: 80%;
+    border-radius: 3vw;
+    background-color: gray;
+
+  }
+}

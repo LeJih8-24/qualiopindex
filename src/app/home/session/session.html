@@ -1,0 +1,46 @@
+<div>
+  <button (click)="back.emit()">← Back</button>
+  @if (error()) {
+    <p>{{ error() }}</p>
+  } @else if (!format()) {
+    <p>Loading...</p>
+  }
+  @if (format(); as f) {
+    <div>
+
+      <input [(ngModel)]="f.client" (change)="save()" placeholder="client">
+      <input [(ngModel)]="f.date" (change)="save()" placeholder="date">
+      <input [(ngModel)]="f.description" (change)="save()" placeholder="description">
+      <input [(ngModel)]="f.formation" (change)="save()" placeholder="formation">
+      <input [(ngModel)]="f.formateur" (change)="save()" placeholder="formateur">
+      <input [(ngModel)]="f.financer" (change)="save()" placeholder="financer">
+      <input type="number" [(ngModel)]="f.durer" (change)="save()" placeholder="durer">
+
+      <h2>Before</h2>
+      <span>Questionnaire: 6/8</span><br>
+      <span>Convocation avec le lien de connexion</span>
+      <input type="file">
+
+      <h2>While</h2>
+      @for (day of days(); track day.id) {
+        <span>day {{ day.which }}</span>
+        @for (present of presentsByDay().get(day.id) ?? []; track present.id) {
+          <input type="text" placeholder="Name" [value]="present.present"
+                 (input)="update_present(present.id, $any($event.target).value)" />
+        }
+        <button (click)="add_present(day.id)">Present</button><br>
+      }
+      <button (click)="add_day()">add days</button>
+
+      <h2>After</h2>
+      <span>Satisfaction / 8 hours later</span>
+      <input type="range" min="0" max="10" [(ngModel)]="f.satis" (change)="save()"><br>
+      <span>Satisfaction afterward</span>
+      <input type="range" min="0" max="10" [(ngModel)]="f.satisLater" (change)="save()">
+    </div>
+
+    <br>
+    <button (click)="get()">Get</button>
+    <pre>{{ debug() }}</pre>
+  }
+</div>
