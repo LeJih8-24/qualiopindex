@@ -40,7 +40,6 @@ export class Session implements OnInit {
     this.formatService.getPresents(id).subscribe((p) => this.presents.set(p ?? []));
   }
 
-  // call on (change)/(blur) of the fields
   save() {
     const f = this.format();
     if (f) this.formatService.update(f).subscribe();

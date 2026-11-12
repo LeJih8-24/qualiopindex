@@ -63,7 +63,6 @@ export class FormatService {
   updatePresent(id: string, text: string) {
     return this.http.patch(`${environment.apiUrl}/presents/${id}`, { present: text });
   }
-  
   remove(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
